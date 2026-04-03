@@ -33,52 +33,150 @@ def get_mapping_df():
 # 2. CATEGORIZATION LOGIC (Scraper-Informed)
 # ==========================================
 def get_category_from_scraper(col):
-    """Categorizes columns based on the specific prefixes used in game_report_scrape.py"""
-    c = col.lower()
-    
-    # Defensive Tracking (Scraper url18-url23)
-    if 'overall_def_' in c: return 'Defensive Tracking - Overall'
-    if 'three_pt_def_' in c: return 'Defensive Tracking - 3PT'
-    if 'two_pt_def_' in c: return 'Defensive Tracking - 2PT'
-    if 'less_6ft_def_' in c: return 'Defensive Tracking - Rim (<6ft)'
-    if 'less_10ft_def_' in c: return 'Defensive Tracking - Paint (<10ft)'
-    if 'more_15ft_def_' in c: return 'Defensive Tracking - Perimeter (>15ft)'
-    
-    # Shot Context / Defenders (Scraper url7-url10)
-    if 'very_tight_' in c: return 'Shot Context - Very Tight (0-2ft)'
-    if 'tight_' in c: return 'Shot Context - Tight (2-4ft)'
-    if 'open_' in c: return 'Shot Context - Open (4-6ft)'
-    if 'wide_open_' in c: return 'Shot Context - Wide Open (6ft+)'
-    
-    # Play Types & Touches (Scraper url11-url13, url25)
-    if 'pullup_' in c: return 'Play Type - Pull Up'
-    if 'post_touch_' in c: return 'Play Type - Post Touch'
-    if 'catch_shoot' in c: return 'Play Type - Catch and Shoot'
-    if 'drive_' in c: return 'Play Type - Drives'
-    
-    # Hustle & Effort (Scraper url24)
-    if 'hustle_' in c or any(x in c for x in ['boxout', 'box_out', 'screen_ast', 'defle', 'loose_ball', 'charges_drawn']):
-        return 'Tracking - Hustle'
-    
-    # Movement & Passing
-    if any(x in c for x in ['speed_distance_', 'dist_miles', 'avg_speed', 'touches', 'front_ct_touches', 'time_of_poss']):
+    c = col.lower().strip()
+
+    # ── 1. METADATA / CONTEXT ─────────────────────────────────────────────────
+    if c in ('player_id','player_name','nickname','team_id','team_abbreviation',
+             'team_abbr','player_last_team_abbreviation','player_position',
+             'age','g','gp','w','l','w_pct','min','min1','team_count',
+             'year','date','playoffs','game_id','index','htm','vtm',
+             'opp_team_abbr','opp_team_id','opp_team_id ','player_last_team_id',
+             'season','opp_team'):
+        return 'Metadata/Context'
+
+    # ── 2. PREFIXED BLOCKS (defensive tracking, shot context, hustle, post, sp_work) ──
+
+    # Defensive tracking (url18-23)
+    if c.startswith('overall_def_'):   return 'Defensive Tracking - Overall'
+    if c.startswith('three_pt_def_'):  return 'Defensive Tracking - 3PT'
+    if c.startswith('two_pt_def_'):    return 'Defensive Tracking - 2PT'
+    if c.startswith('less_6ft_def_'):  return 'Defensive Tracking - Rim (<6ft)'
+    if c.startswith('less_10ft_def_'): return 'Defensive Tracking - Paint (<10ft)'
+    if c.startswith('more_15ft_def_'): return 'Defensive Tracking - Perimeter (>15ft)'
+
+    # Shot-contest context (url7-10)
+    if c.startswith('very_tight_'): return 'Shot Context - Very Tight (0-2ft)'
+    if c.startswith('tight_'):      return 'Shot Context - Tight (2-4ft)'
+    if c.startswith('open_'):       return 'Shot Context - Open (4-6ft)'
+    if c.startswith('wide_open_'):  return 'Shot Context - Wide Open (6ft+)'
+
+    # Hustle stats (url24)
+    if c.startswith('hustle_'): return 'Tracking - Hustle'
+
+    # Post touch (url25) — includes double-prefixed post_touch_POST_TOUCH_* columns
+    if c.startswith('post_touch_'): return 'Play Type - Post Touch'
+
+    # Estimated ratings from df12 efficiency endpoint
+    if c.startswith('sp_work_'): return 'Advanced - Estimated Ratings (sp_work)'
+
+    # ── 3. PLAY TYPES ─────────────────────────────────────────────────────────
+
+    # Pull-up shots — scraper produces PULL_UP_ (df11, all-caps shotcolumns2)
+    # NOTE: old code checked 'pullup_' which never matched real data
+    if c.startswith('pull_up_') or c.startswith('pullup_'):
+        return 'Play Type - Pull Up'
+
+    # Catch & shoot (url16)
+    if c.startswith('catch_shoot_'):
+        return 'Play Type - Catch and Shoot'
+
+    # Drives (url4) — raw columns are DRIVE_ (all-caps)
+    if c.startswith('drive_') or c == 'drives':
+        return 'Play Type - Drives'
+
+    # ── 4. SHOT ZONES / LOCATIONS ─────────────────────────────────────────────
+
+    # By-zone locations (url13 — RA, ITP, MID, corners, above-break, backcourt)
+    if c in ('ra_fgm','ra_fga','ra_fg_pct',
+             'itp_fgm','itp_fga','itp_fg_pct',
+             'mid_fgm','mid_fga','mid_fg_pct',
+             'left_corner_3_fgm','left_corner_3_fga','left_corner_3_fg_pct',
+             'right_corner_3_fgm','right_corner_3_fga','right_corner_3_fg_pct',
+             'corner_3_fgm','corner_3_fga','corner_3_fg_pct',
+             'above_break_3_fgm','above_break_3_fga','above_break_3_fg_pct',
+             'backcourt_fgm','backcourt_fga','backcourt_fg_pct'):
+        return 'Shot Locations - By Zone'
+
+    # 5-ft distance bands (url15 — FGM_LT_5 through FGM_40_PLUS)
+    _dist_prefixes = ('fgm_lt_','fga_lt_','fgp_lt_',
+                      'fgm_5_','fga_5_','fgp_5_',
+                      'fgm_10_','fga_10_','fgp_10_',
+                      'fgm_15_','fga_15_','fgp_15_',
+                      'fgm_20_','fga_20_','fgp_20_',
+                      'fgm_25_','fga_25_','fgp_25_',
+                      'fgm_30_','fga_30_','fgp_30_',
+                      'fgm_35_','fga_35_','fgp_35_',
+                      'fgm_40_','fga_40_','fgp_40_')
+    if any(c.startswith(p) for p in _dist_prefixes):
+        return 'Shot Locations - 5ft Distance Bands'
+
+    # Unprefixed df14 rim-defense columns (Overall <6ft defense, before prefix rename)
+    if c in ('lt_06_pct','fgm_lt_06','fga_lt_06','ns_lt_06_pct',
+             'freq','plusminus','pct_plusminus',
+             'd_fga','d_fgm','d_fg_pct','normal_fg_pct'):
+        return 'Defensive Tracking - Rim (<6ft)'
+
+    # ── 5. REBOUNDING TRACKING (url6) ─────────────────────────────────────────
+    _reb_terms = ('reb_chance','oreb_chance','dreb_chance',
+                  'reb_contest','oreb_contest','dreb_contest',
+                  'reb_uncontest','oreb_uncontest','dreb_uncontest',
+                  'avg_oreb_dist','avg_dreb_dist','avg_reb_dist',
+                  'reb_chance_defer','oreb_chance_defer','dreb_chance_defer')
+    if any(x in c for x in _reb_terms):
+        return 'Tracking - Rebounding Contests'
+
+    # ── 6. SPEED / DISTANCE TRACKING (url26) ──────────────────────────────────
+    if c in ('avg_speed','avg_speed_off','avg_speed_def',
+             'dist_miles','dist_miles_off','dist_miles_def','dist_feet'):
+        return 'Tracking - Speed & Distance'
+
+    # ── 7. TOUCHES / POSSESSIONS (url5 + df12 touch efficiency) ──────────────
+    _touch_terms = ('touches','time_of_poss','front_ct_touches',
+                    'paint_touches','elbow_touches','post_touches',
+                    'avg_drib_per_touch','avg_sec_per_touch',
+                    'pts_per_touch','pts_per_paint_touch',
+                    'pts_per_elbow_touch','pts_per_post_touch',
+                    'paint_touch_fg_pct','paint_touch_pts',
+                    'elbow_touch_fg_pct','elbow_touch_pts',
+                    'post_touch_fg_pct','post_touch_pts',
+                    'points')
+    if any(x in c for x in _touch_terms):
         return 'Tracking - Physical/Touches'
-    if any(x in c for x in ['pass_', 'potential_ast', 'ast_pts_created', 'ast_adj', 'secondary_ast']):
+
+    # ── 8. PASSING / PLAYMAKING (url3) ────────────────────────────────────────
+    _pass_terms = ('passes_made','passes_received','potential_ast',
+                   'ast_pts_created','ast_points_created',
+                   'ast_adj','secondary_ast','ft_ast',
+                   'ast_to_pass_pct','ast_to_pass_pct_adj')
+    if any(x in c for x in _pass_terms) or c.startswith('pass_'):
         return 'Tracking - Playmaking'
 
-    # Efficiency & Ratings
-    if any(x in c for x in ['pie', 'off_rating', 'def_rating', 'net_rating', 'ast_ratio', 'usg_pct', 'pace', 'ts_pct', 'efg_pct']):
-        if '_rank' not in c: return 'Advanced - Efficiency'
-            
-    if '_rank' in c: return 'NBA.com Rankings'
+    # ── 9. NBA.COM RANKINGS (always before generic suffix checks) ─────────────
+    if c.endswith('_rank'):
+        return 'NBA.com Rankings'
 
-    # Core Stats
-    if any(x in c for x in ['pts', 'ast', 'reb', 'stl', 'blk', 'tov', 'pf', 'min', 'fgm', 'fga', 'ftm', 'fta', 'fg3m', 'fg3a']):
+    # ── 10. ADVANCED / EFFICIENCY (url2 — Advanced MeasureType) ──────────────
+    _adv_terms = ('pie','off_rating','def_rating','net_rating',
+                  'e_off_rating','e_def_rating','e_net_rating',
+                  'e_pace','e_tov_pct','e_usg_pct',
+                  'ast_ratio','ast_pct','ast_to',
+                  'usg_pct','pace','pace_per40',
+                  'ts_pct','efg_pct','eff_fg_pct',
+                  'tm_tov_pct','oreb_pct','dreb_pct','reb_pct',
+                  'poss','team_poss')
+    if any(x in c for x in _adv_terms):
+        return 'Advanced - Efficiency'
+
+    # ── 11. DERIVED / FANTASY ─────────────────────────────────────────────────
+    if any(x in c for x in ('nba_fantasy_pts','wnba_fantasy_pts','dd2','td3',
+                             'plus_minus','w_pct','fgm_pg','fga_pg')):
+        return 'Derived / Fantasy'
+
+    # ── 12. STANDARD BOX SCORE (url1 — Base MeasureType) ─────────────────────
+    if any(x in c for x in ('pts','ast','reb','stl','blk','blka','tov','pf','pfd',
+                             'fgm','fga','fg_pct','fg3m','fg3a','fg3_pct',
+                             'ftm','fta','ft_pct','oreb','dreb')):
         return 'Standard Box Score'
-
-    # Contextual info
-    if any(x in c for x in ['player_id', 'team_id', 'game_id', 'date', 'year', 'season', 'playoffs', 'htm', 'vtm', 'opp_team']):
-        return 'Metadata/Context'
 
     return 'Other/Uncategorized'
 
