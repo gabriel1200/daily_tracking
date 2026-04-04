@@ -1,48 +1,28 @@
 col,start_year,avg_completeness,category
-AST_PCT,2014,1.0,Advanced - Efficiency
 AST_RATIO,2014,1.0,Advanced - Efficiency
-AST_TO,2014,1.0,Advanced - Efficiency
 DEF_RATING,2014,1.0,Advanced - Efficiency
-DREB_PCT,2014,1.0,Advanced - Efficiency
-EFF_FG_PCT,2014,0.997111834046091,Advanced - Efficiency
 EFG_PCT,2014,1.0,Advanced - Efficiency
 E_DEF_RATING,2014,1.0,Advanced - Efficiency
 E_NET_RATING,2014,1.0,Advanced - Efficiency
 E_OFF_RATING,2014,1.0,Advanced - Efficiency
 E_PACE,2014,1.0,Advanced - Efficiency
-E_TOV_PCT,2014,1.0,Advanced - Efficiency
 E_USG_PCT,2014,1.0,Advanced - Efficiency
 NET_RATING,2014,1.0,Advanced - Efficiency
 OFF_RATING,2014,1.0,Advanced - Efficiency
-OREB_PCT,2014,1.0,Advanced - Efficiency
 PACE,2014,1.0,Advanced - Efficiency
 PACE_PER40,2014,1.0,Advanced - Efficiency
 PIE,2014,1.0,Advanced - Efficiency
-POSS,2014,1.0,Advanced - Efficiency
-REB_PCT,2014,1.0,Advanced - Efficiency
-TM_TOV_PCT,2014,1.0,Advanced - Efficiency
+PULL_UP_EFG_PCT,2014,0.5883102861032452,Advanced - Efficiency
 TS_PCT,2014,1.0,Advanced - Efficiency
 USG_PCT,2014,1.0,Advanced - Efficiency
-sp_work_DEF_RATING,2014,1.0,Advanced - Estimated Ratings (sp_work)
-sp_work_DEF_RATING_RANK,2014,1.0,Advanced - Estimated Ratings (sp_work)
-sp_work_NET_RATING,2014,1.0,Advanced - Estimated Ratings (sp_work)
-sp_work_NET_RATING_RANK,2014,1.0,Advanced - Estimated Ratings (sp_work)
-sp_work_OFF_RATING,2014,1.0,Advanced - Estimated Ratings (sp_work)
-sp_work_OFF_RATING_RANK,2014,1.0,Advanced - Estimated Ratings (sp_work)
-sp_work_PACE,2014,1.0,Advanced - Estimated Ratings (sp_work)
-sp_work_PACE_RANK,2014,1.0,Advanced - Estimated Ratings (sp_work)
 two_pt_def_FG2A,2014,0.9181387968960029,Defensive Tracking - 2PT
 two_pt_def_FG2M,2014,0.9181387968960029,Defensive Tracking - 2PT
 two_pt_def_FG2_PCT,2014,0.9181387968960029,Defensive Tracking - 2PT
-two_pt_def_FREQ,2014,0.9181387968960029,Defensive Tracking - 2PT
 two_pt_def_NS_FG2_PCT,2014,0.9181387968960029,Defensive Tracking - 2PT
-two_pt_def_PLUSMINUS,2014,0.9181387968960029,Defensive Tracking - 2PT
 three_pt_def_FG3A,2014,0.831600490277376,Defensive Tracking - 3PT
 three_pt_def_FG3M,2014,0.831600490277376,Defensive Tracking - 3PT
 three_pt_def_FG3_PCT,2014,0.831600490277376,Defensive Tracking - 3PT
-three_pt_def_FREQ,2014,0.831600490277376,Defensive Tracking - 3PT
 three_pt_def_NS_FG3_PCT,2014,0.831600490277376,Defensive Tracking - 3PT
-three_pt_def_PLUSMINUS,2014,0.831600490277376,Defensive Tracking - 3PT
 overall_def_D_FGA,2014,0.9498738102558189,Defensive Tracking - Overall
 overall_def_D_FGM,2014,0.9498738102558189,Defensive Tracking - Overall
 overall_def_D_FG_PCT,2014,0.9498738102558189,Defensive Tracking - Overall
@@ -51,124 +31,55 @@ overall_def_NORMAL_FG_PCT,2014,0.9498738102558189,Defensive Tracking - Overall
 overall_def_PCT_PLUSMINUS,2014,0.9498738102558189,Defensive Tracking - Overall
 less_10ft_def_FGA_LT_10,2014,0.8723294404354016,Defensive Tracking - Paint (<10ft)
 less_10ft_def_FGM_LT_10,2014,0.8723294404354016,Defensive Tracking - Paint (<10ft)
-less_10ft_def_FREQ,2014,0.8723294404354016,Defensive Tracking - Paint (<10ft)
 less_10ft_def_LT_10_PCT,2014,0.8723294404354016,Defensive Tracking - Paint (<10ft)
 less_10ft_def_NS_LT_10_PCT,2014,0.8723294404354016,Defensive Tracking - Paint (<10ft)
-less_10ft_def_PLUSMINUS,2014,0.8723294404354016,Defensive Tracking - Paint (<10ft)
 more_15ft_def_FGA_GT_15,2014,0.8873277472970007,Defensive Tracking - Perimeter (>15ft)
 more_15ft_def_FGM_GT_15,2014,0.8873277472970007,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_FREQ,2014,0.8873277472970007,Defensive Tracking - Perimeter (>15ft)
 more_15ft_def_GT_15_PCT,2014,0.8873277472970007,Defensive Tracking - Perimeter (>15ft)
 more_15ft_def_NS_GT_15_PCT,2014,0.8873277472970007,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_PLUSMINUS,2014,0.8873277472970007,Defensive Tracking - Perimeter (>15ft)
-FREQ,2014,0.9646313498377991,Defensive Tracking - Rim (<6ft)
-LT_06_PCT,2014,0.9646313498377991,Defensive Tracking - Rim (<6ft)
-NS_LT_06_PCT,2014,0.9646313498377991,Defensive Tracking - Rim (<6ft)
-PLUSMINUS,2014,0.9646313498377991,Defensive Tracking - Rim (<6ft)
-less_6ft_def_FGA_LT_06,2014,0.8310926538763524,Defensive Tracking - Rim (<6ft)
-less_6ft_def_FGM_LT_06,2014,0.8310926538763524,Defensive Tracking - Rim (<6ft)
-less_6ft_def_FREQ,2014,0.8310926538763524,Defensive Tracking - Rim (<6ft)
-less_6ft_def_LT_06_PCT,2014,0.8310926538763524,Defensive Tracking - Rim (<6ft)
-less_6ft_def_NS_LT_06_PCT,2014,0.8310926538763524,Defensive Tracking - Rim (<6ft)
-less_6ft_def_PLUSMINUS,2014,0.8310926538763524,Defensive Tracking - Rim (<6ft)
-DD2,2014,1.0,Derived / Fantasy
-FGA_PG,2014,1.0,Derived / Fantasy
-FGM_PG,2014,1.0,Derived / Fantasy
-NBA_FANTASY_PTS,2014,1.0,Derived / Fantasy
-PLUS_MINUS,2014,1.0,Derived / Fantasy
-TD3,2014,1.0,Derived / Fantasy
-WNBA_FANTASY_PTS,2014,1.0,Derived / Fantasy
-AGE,2014,1.0,Metadata/Context
-G,2014,0.46901527598135845,Metadata/Context
 GAME_ID,2014,1.0,Metadata/Context
-GP,2014,1.0,Metadata/Context
-HTM,2014,0.015004589131199708,Metadata/Context
-L,2014,1.0,Metadata/Context
-MIN,2014,1.0,Metadata/Context
-NICKNAME,2014,1.0,Metadata/Context
 PLAYER_ID,2014,1.0,Metadata/Context
-PLAYER_LAST_TEAM_ABBREVIATION,2014,0.4555919050835563,Metadata/Context
-PLAYER_LAST_TEAM_ID,2014,0.4637953861776174,Metadata/Context
-PLAYER_NAME,2014,1.0,Metadata/Context
-PLAYER_POSITION,2014,0.9646313498377991,Metadata/Context
-TEAM_ABBR,2014,0.998601508562287,Metadata/Context
-TEAM_ABBREVIATION,2014,1.0,Metadata/Context
 TEAM_ID,2014,1.0,Metadata/Context
-VTM,2014,0.015004589131199708,Metadata/Context
-W,2014,1.0,Metadata/Context
-W_PCT,2014,1.0,Metadata/Context
 date,2014,1.0,Metadata/Context
-index,2014,0.02875879583479944,Metadata/Context
-opp_team,2014,0.5547927394643457,Metadata/Context
 playoffs,2014,0.9535251765177669,Metadata/Context
 season,2014,0.9996018732588237,Metadata/Context
 year,2014,1.0,Metadata/Context
-AST_PCT_RANK,2014,1.0,NBA.com Rankings
-AST_RANK,2014,1.0,NBA.com Rankings
-AST_RATIO_RANK,2014,1.0,NBA.com Rankings
-AST_TO_RANK,2014,1.0,NBA.com Rankings
-BLKA_RANK,2014,1.0,NBA.com Rankings
-BLK_RANK,2014,1.0,NBA.com Rankings
-DD2_RANK,2014,1.0,NBA.com Rankings
-DEF_RATING_RANK,2014,1.0,NBA.com Rankings
-DREB_PCT_RANK,2014,1.0,NBA.com Rankings
-DREB_RANK,2014,1.0,NBA.com Rankings
-EFG_PCT_RANK,2014,1.0,NBA.com Rankings
-E_DEF_RATING_RANK,2014,1.0,NBA.com Rankings
-E_NET_RATING_RANK,2014,1.0,NBA.com Rankings
-E_OFF_RATING_RANK,2014,1.0,NBA.com Rankings
-E_PACE_RANK,2014,1.0,NBA.com Rankings
-E_TOV_PCT_RANK,2014,1.0,NBA.com Rankings
-E_USG_PCT_RANK,2014,1.0,NBA.com Rankings
-FG3A_RANK,2014,1.0,NBA.com Rankings
-FG3M_RANK,2014,1.0,NBA.com Rankings
-FG3_PCT_RANK,2014,1.0,NBA.com Rankings
-FGA_PG_RANK,2014,1.0,NBA.com Rankings
-FGA_RANK,2014,1.0,NBA.com Rankings
-FGM_PG_RANK,2014,1.0,NBA.com Rankings
-FGM_RANK,2014,1.0,NBA.com Rankings
-FG_PCT_RANK,2014,1.0,NBA.com Rankings
-FTA_RANK,2014,1.0,NBA.com Rankings
-FTM_RANK,2014,1.0,NBA.com Rankings
-FT_PCT_RANK,2014,1.0,NBA.com Rankings
-GP_RANK,2014,1.0,NBA.com Rankings
-L_RANK,2014,1.0,NBA.com Rankings
-MIN_RANK,2014,1.0,NBA.com Rankings
-NBA_FANTASY_PTS_RANK,2014,1.0,NBA.com Rankings
-NET_RATING_RANK,2014,1.0,NBA.com Rankings
-OFF_RATING_RANK,2014,1.0,NBA.com Rankings
-OREB_PCT_RANK,2014,1.0,NBA.com Rankings
-OREB_RANK,2014,1.0,NBA.com Rankings
-PACE_RANK,2014,1.0,NBA.com Rankings
-PFD_RANK,2014,1.0,NBA.com Rankings
-PF_RANK,2014,1.0,NBA.com Rankings
-PIE_RANK,2014,1.0,NBA.com Rankings
-PLUS_MINUS_RANK,2014,1.0,NBA.com Rankings
-PTS_RANK,2014,1.0,NBA.com Rankings
-REB_PCT_RANK,2014,1.0,NBA.com Rankings
-REB_RANK,2014,1.0,NBA.com Rankings
-STL_RANK,2014,1.0,NBA.com Rankings
-TD3_RANK,2014,1.0,NBA.com Rankings
-TM_TOV_PCT_RANK,2014,1.0,NBA.com Rankings
-TOV_RANK,2014,1.0,NBA.com Rankings
-TS_PCT_RANK,2014,1.0,NBA.com Rankings
-USG_PCT_RANK,2014,1.0,NBA.com Rankings
-WNBA_FANTASY_PTS_RANK,2014,1.0,NBA.com Rankings
-W_PCT_RANK,2014,1.0,NBA.com Rankings
-W_RANK,2014,1.0,NBA.com Rankings
-opp_id,2014,0.5547927394643457,Other/Uncategorized
-series_key,2014,0.5547927394643457,Other/Uncategorized
-speed_distance_AVG_SPEED,2014,0.9950865283348134,Other/Uncategorized
-speed_distance_AVG_SPEED_DEF,2014,0.9950865283348134,Other/Uncategorized
-speed_distance_AVG_SPEED_OFF,2014,0.9950865283348134,Other/Uncategorized
-speed_distance_DIST_FEET,2014,0.9948155961699355,Other/Uncategorized
-speed_distance_DIST_MILES,2014,0.9948155961699355,Other/Uncategorized
-speed_distance_DIST_MILES_DEF,2014,0.993924805587583,Other/Uncategorized
-speed_distance_DIST_MILES_OFF,2014,0.9935394341217978,Other/Uncategorized
-speed_distance_MIN1,2014,0.9973718369385014,Other/Uncategorized
-speed_distance_TEAM_ABBREVIATION,2014,0.9981413401092621,Other/Uncategorized
-speed_distance_TEAM_ID,2014,0.9981413401092621,Other/Uncategorized
-team,2014,0.5547927394643457,Other/Uncategorized
+ABOVE_BREAK_3_FG_PCT,2014,0.9898955734129089,Other/Uncategorized
+AGE,2014,1.0,Other/Uncategorized
+AVG_DRIB_PER_TOUCH,2014,0.997111834046091,Other/Uncategorized
+AVG_SEC_PER_TOUCH,2014,0.997111834046091,Other/Uncategorized
+BACKCOURT_FG_PCT,2014,0.7743137095922541,Other/Uncategorized
+CORNER_3_FG_PCT,2014,0.9352800023790967,Other/Uncategorized
+DRIVES,2014,0.997111834046091,Other/Uncategorized
+EFF_FG_PCT,2014,0.997111834046091,Other/Uncategorized
+ELBOW_TOUCH_FG_PCT,2014,0.997111834046091,Other/Uncategorized
+FG3_PCT,2014,1.0,Other/Uncategorized
+FGP_10_14,2014,0.951446508301828,Other/Uncategorized
+FGP_15_19,2014,0.9502864942587286,Other/Uncategorized
+FGP_20_24,2014,0.9711079757894797,Other/Uncategorized
+FGP_25_29,2014,0.9780206613792904,Other/Uncategorized
+FGP_30_34,2014,0.5152631397660514,Other/Uncategorized
+FGP_35_39,2014,0.31494812083495266,Other/Uncategorized
+FGP_40_PLUS,2014,0.798097749348955,Other/Uncategorized
+FGP_5_9,2014,0.9622228142809262,Other/Uncategorized
+FGP_LT_5,2014,0.9834114112578591,Other/Uncategorized
+FG_PCT,2014,1.0,Other/Uncategorized
+FREQ,2014,0.9646313498377991,Other/Uncategorized
+FT_PCT,2014,1.0,Other/Uncategorized
+ITP_FG_PCT,2014,0.9734458297435816,Other/Uncategorized
+LEFT_CORNER_3_FG_PCT,2014,0.8762118740435036,Other/Uncategorized
+LT_06_PCT,2014,0.9646313498377991,Other/Uncategorized
+MID_FG_PCT,2014,0.976722319122848,Other/Uncategorized
+NS_LT_06_PCT,2014,0.9646313498377991,Other/Uncategorized
+PAINT_TOUCH_FG_PCT,2014,0.997111834046091,Other/Uncategorized
+PASSES_MADE,2014,0.997111834046091,Other/Uncategorized
+PASSES_RECEIVED,2014,0.997111834046091,Other/Uncategorized
+POSS,2014,1.0,Other/Uncategorized
+PULL_UP_FG3_PCT,2014,0.36184175973481786,Other/Uncategorized
+PULL_UP_FG_PCT,2014,0.5883102861032452,Other/Uncategorized
+RA_FG_PCT,2014,0.9809480097582746,Other/Uncategorized
+RIGHT_CORNER_3_FG_PCT,2014,0.8636659582543186,Other/Uncategorized
+TEAM_ABBREVIATION,2014,1.0,Other/Uncategorized
 CATCH_SHOOT_EFG_PCT,2014,0.7413338941414926,Play Type - Catch and Shoot
 CATCH_SHOOT_FG3A,2014,0.7208265399995655,Play Type - Catch and Shoot
 CATCH_SHOOT_FG3M,2014,0.7208265399995655,Play Type - Catch and Shoot
@@ -177,7 +88,6 @@ CATCH_SHOOT_FGA,2014,1.0,Play Type - Catch and Shoot
 CATCH_SHOOT_FGM,2014,1.0,Play Type - Catch and Shoot
 CATCH_SHOOT_FG_PCT,2014,0.997111834046091,Play Type - Catch and Shoot
 CATCH_SHOOT_PTS,2014,0.997111834046091,Play Type - Catch and Shoot
-DRIVES,2014,0.997111834046091,Play Type - Drives
 DRIVE_AST,2014,0.997111834046091,Play Type - Drives
 DRIVE_AST_PCT,2014,0.997111834046091,Play Type - Drives
 DRIVE_FGA,2014,0.997111834046091,Play Type - Drives
@@ -196,12 +106,10 @@ DRIVE_TOV,2014,0.997111834046091,Play Type - Drives
 DRIVE_TOV_PCT,2014,0.997111834046091,Play Type - Drives
 POST_TOUCH_FG_PCT,2014,0.997111834046091,Play Type - Post Touch
 POST_TOUCH_PTS,2014,0.997111834046091,Play Type - Post Touch
-post_touch_POST_TOUCHES,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_AST,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_AST_PCT,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_FGA,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_FGM,2014,0.9972730907667176,Play Type - Post Touch
-post_touch_POST_TOUCH_FG_PCT,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_FOULS,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_FOULS_PCT,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_FTA,2014,0.9972730907667176,Play Type - Post Touch
@@ -209,21 +117,9 @@ post_touch_POST_TOUCH_FTM,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_FT_PCT,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_PASSES,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_PASSES_PCT,2014,0.9972730907667176,Play Type - Post Touch
-post_touch_POST_TOUCH_PTS,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_PTS_PCT,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_TOV,2014,0.9972730907667176,Play Type - Post Touch
 post_touch_POST_TOUCH_TOV_PCT,2014,0.9972730907667176,Play Type - Post Touch
-post_touch_TEAM_ABBREVIATION,2014,0.9978621319332387,Play Type - Post Touch
-post_touch_TEAM_ID,2014,0.9981413401092621,Play Type - Post Touch
-post_touch_TOUCHES,2014,0.9972730907667176,Play Type - Post Touch
-PULL_UP_EFG_PCT,2014,0.5883102861032452,Play Type - Pull Up
-PULL_UP_FG3A,2014,0.7206386938086687,Play Type - Pull Up
-PULL_UP_FG3M,2014,0.7206386938086687,Play Type - Pull Up
-PULL_UP_FG3_PCT,2014,0.36184175973481786,Play Type - Pull Up
-PULL_UP_FGA,2014,1.0,Play Type - Pull Up
-PULL_UP_FGM,2014,1.0,Play Type - Pull Up
-PULL_UP_FG_PCT,2014,0.5883102861032452,Play Type - Pull Up
-PULL_UP_PTS,2014,1.0,Play Type - Pull Up
 open_EFG_PCT,2014,0.7208137701143796,Shot Context - Open (4-6ft)
 open_FG2A,2014,0.7208137701143796,Shot Context - Open (4-6ft)
 open_FG2A_FREQUENCY,2014,0.7208137701143796,Shot Context - Open (4-6ft)
@@ -237,6 +133,19 @@ open_FGA,2014,0.7208137701143796,Shot Context - Open (4-6ft)
 open_FGA_FREQUENCY,2014,0.7208137701143796,Shot Context - Open (4-6ft)
 open_FGM,2014,0.7208137701143796,Shot Context - Open (4-6ft)
 open_FG_PCT,2014,0.7208137701143796,Shot Context - Open (4-6ft)
+wide_open_EFG_PCT,2014,0.689838760987898,Shot Context - Open (4-6ft)
+wide_open_FG2A,2014,0.689838760987898,Shot Context - Open (4-6ft)
+wide_open_FG2A_FREQUENCY,2014,0.689838760987898,Shot Context - Open (4-6ft)
+wide_open_FG2M,2014,0.689838760987898,Shot Context - Open (4-6ft)
+wide_open_FG2_PCT,2014,0.2740874639012066,Shot Context - Open (4-6ft)
+wide_open_FG3A,2014,0.689838760987898,Shot Context - Open (4-6ft)
+wide_open_FG3A_FREQUENCY,2014,0.689838760987898,Shot Context - Open (4-6ft)
+wide_open_FG3M,2014,0.689838760987898,Shot Context - Open (4-6ft)
+wide_open_FG3_PCT,2014,0.6003343836476678,Shot Context - Open (4-6ft)
+wide_open_FGA,2014,0.689838760987898,Shot Context - Open (4-6ft)
+wide_open_FGA_FREQUENCY,2014,0.689838760987898,Shot Context - Open (4-6ft)
+wide_open_FGM,2014,0.689838760987898,Shot Context - Open (4-6ft)
+wide_open_FG_PCT,2014,0.689838760987898,Shot Context - Open (4-6ft)
 tight_EFG_PCT,2014,0.7816323938181324,Shot Context - Tight (2-4ft)
 tight_FG2A,2014,0.7816323938181324,Shot Context - Tight (2-4ft)
 tight_FG2A_FREQUENCY,2014,0.7816323938181324,Shot Context - Tight (2-4ft)
@@ -263,142 +172,117 @@ very_tight_FGA,2014,0.46901527598135845,Shot Context - Very Tight (0-2ft)
 very_tight_FGA_FREQUENCY,2014,0.46901527598135845,Shot Context - Very Tight (0-2ft)
 very_tight_FGM,2014,0.46901527598135845,Shot Context - Very Tight (0-2ft)
 very_tight_FG_PCT,2014,0.46901527598135845,Shot Context - Very Tight (0-2ft)
-wide_open_EFG_PCT,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-wide_open_FG2A,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-wide_open_FG2A_FREQUENCY,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-wide_open_FG2M,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-wide_open_FG2_PCT,2014,0.2740874639012066,Shot Context - Wide Open (6ft+)
-wide_open_FG3A,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-wide_open_FG3A_FREQUENCY,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-wide_open_FG3M,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-wide_open_FG3_PCT,2014,0.6003343836476678,Shot Context - Wide Open (6ft+)
-wide_open_FGA,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-wide_open_FGA_FREQUENCY,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-wide_open_FGM,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-wide_open_FG_PCT,2014,0.689838760987898,Shot Context - Wide Open (6ft+)
-FGA_10_14,2014,0.951446508301828,Shot Locations - 5ft Distance Bands
-FGA_15_19,2014,0.9502864942587286,Shot Locations - 5ft Distance Bands
-FGA_20_24,2014,0.9711079757894797,Shot Locations - 5ft Distance Bands
-FGA_25_29,2014,0.9780206613792904,Shot Locations - 5ft Distance Bands
-FGA_30_34,2014,0.5152631397660514,Shot Locations - 5ft Distance Bands
-FGA_35_39,2014,0.31494812083495266,Shot Locations - 5ft Distance Bands
-FGA_40_PLUS,2014,0.798097749348955,Shot Locations - 5ft Distance Bands
-FGA_5_9,2014,0.9622228142809262,Shot Locations - 5ft Distance Bands
-FGA_LT_06,2014,0.9646313498377991,Shot Locations - 5ft Distance Bands
-FGA_LT_5,2014,0.9834114112578591,Shot Locations - 5ft Distance Bands
-FGM_10_14,2014,0.951446508301828,Shot Locations - 5ft Distance Bands
-FGM_15_19,2014,0.9502864942587286,Shot Locations - 5ft Distance Bands
-FGM_20_24,2014,0.9711079757894797,Shot Locations - 5ft Distance Bands
-FGM_25_29,2014,0.9780206613792904,Shot Locations - 5ft Distance Bands
-FGM_30_34,2014,0.5152631397660514,Shot Locations - 5ft Distance Bands
-FGM_35_39,2014,0.31494812083495266,Shot Locations - 5ft Distance Bands
-FGM_40_PLUS,2014,0.798097749348955,Shot Locations - 5ft Distance Bands
-FGM_5_9,2014,0.9622228142809262,Shot Locations - 5ft Distance Bands
-FGM_LT_06,2014,0.9646313498377991,Shot Locations - 5ft Distance Bands
-FGM_LT_5,2014,0.9834114112578591,Shot Locations - 5ft Distance Bands
-FGP_10_14,2014,0.951446508301828,Shot Locations - 5ft Distance Bands
-FGP_15_19,2014,0.9502864942587286,Shot Locations - 5ft Distance Bands
-FGP_20_24,2014,0.9711079757894797,Shot Locations - 5ft Distance Bands
-FGP_25_29,2014,0.9780206613792904,Shot Locations - 5ft Distance Bands
-FGP_30_34,2014,0.5152631397660514,Shot Locations - 5ft Distance Bands
-FGP_35_39,2014,0.31494812083495266,Shot Locations - 5ft Distance Bands
-FGP_40_PLUS,2014,0.798097749348955,Shot Locations - 5ft Distance Bands
-FGP_5_9,2014,0.9622228142809262,Shot Locations - 5ft Distance Bands
-FGP_LT_5,2014,0.9834114112578591,Shot Locations - 5ft Distance Bands
-ABOVE_BREAK_3_FGA,2014,0.9898955734129089,Shot Locations - By Zone
-ABOVE_BREAK_3_FGM,2014,0.9898955734129089,Shot Locations - By Zone
-ABOVE_BREAK_3_FG_PCT,2014,0.9898955734129089,Shot Locations - By Zone
-BACKCOURT_FGA,2014,0.7743137095922541,Shot Locations - By Zone
-BACKCOURT_FGM,2014,0.7743137095922541,Shot Locations - By Zone
-BACKCOURT_FG_PCT,2014,0.7743137095922541,Shot Locations - By Zone
-CORNER_3_FGA,2014,0.9352800023790967,Shot Locations - By Zone
-CORNER_3_FGM,2014,0.9352800023790967,Shot Locations - By Zone
-CORNER_3_FG_PCT,2014,0.9352800023790967,Shot Locations - By Zone
-ITP_FGA,2014,0.9734458297435816,Shot Locations - By Zone
-ITP_FGM,2014,0.9734458297435816,Shot Locations - By Zone
-ITP_FG_PCT,2014,0.9734458297435816,Shot Locations - By Zone
-LEFT_CORNER_3_FGA,2014,0.8762118740435036,Shot Locations - By Zone
-LEFT_CORNER_3_FGM,2014,0.8762118740435036,Shot Locations - By Zone
-LEFT_CORNER_3_FG_PCT,2014,0.8762118740435036,Shot Locations - By Zone
-MID_FGA,2014,0.976722319122848,Shot Locations - By Zone
-MID_FGM,2014,0.976722319122848,Shot Locations - By Zone
-MID_FG_PCT,2014,0.976722319122848,Shot Locations - By Zone
-RA_FGA,2014,0.9809480097582746,Shot Locations - By Zone
-RA_FGM,2014,0.9809480097582746,Shot Locations - By Zone
-RA_FG_PCT,2014,0.9809480097582746,Shot Locations - By Zone
-RIGHT_CORNER_3_FGA,2014,0.8636659582543186,Shot Locations - By Zone
-RIGHT_CORNER_3_FGM,2014,0.8636659582543186,Shot Locations - By Zone
-RIGHT_CORNER_3_FG_PCT,2014,0.8636659582543186,Shot Locations - By Zone
+ABOVE_BREAK_3_FGA,2014,0.9898955734129089,Standard Box Score
+ABOVE_BREAK_3_FGM,2014,0.9898955734129089,Standard Box Score
 AST,2014,1.0,Standard Box Score
+AST_PCT,2014,1.0,Standard Box Score
+AST_TO,2014,1.0,Standard Box Score
+AVG_DREB_DIST,2014,0.8673579834059756,Standard Box Score
+AVG_OREB_DIST,2014,0.8673579834059756,Standard Box Score
+AVG_REB_DIST,2014,0.8673579834059756,Standard Box Score
+BACKCOURT_FGA,2014,0.7743137095922541,Standard Box Score
+BACKCOURT_FGM,2014,0.7743137095922541,Standard Box Score
 BLK,2014,1.0,Standard Box Score
 BLKA,2014,1.0,Standard Box Score
+CORNER_3_FGA,2014,0.9352800023790967,Standard Box Score
+CORNER_3_FGM,2014,0.9352800023790967,Standard Box Score
 DREB,2014,1.0,Standard Box Score
+DREB_CHANCES,2014,0.8680304069635296,Standard Box Score
+DREB_CHANCE_DEFER,2014,0.8680304069635296,Standard Box Score
+DREB_CHANCE_PCT,2014,0.8680304069635296,Standard Box Score
+DREB_CHANCE_PCT_ADJ,2014,0.8680304069635296,Standard Box Score
+DREB_CONTEST,2014,0.8680304069635296,Standard Box Score
+DREB_CONTEST_PCT,2014,0.8680304069635296,Standard Box Score
+DREB_PCT,2014,1.0,Standard Box Score
+DREB_UNCONTEST,2014,0.8680304069635296,Standard Box Score
+ELBOW_TOUCH_PTS,2014,0.997111834046091,Standard Box Score
+E_TOV_PCT,2014,1.0,Standard Box Score
 FG3A,2014,1.0,Standard Box Score
 FG3M,2014,1.0,Standard Box Score
-FG3_PCT,2014,1.0,Standard Box Score
 FGA,2014,1.0,Standard Box Score
+FGA_10_14,2014,0.951446508301828,Standard Box Score
+FGA_15_19,2014,0.9502864942587286,Standard Box Score
+FGA_20_24,2014,0.9711079757894797,Standard Box Score
+FGA_25_29,2014,0.9780206613792904,Standard Box Score
+FGA_30_34,2014,0.5152631397660514,Standard Box Score
+FGA_35_39,2014,0.31494812083495266,Standard Box Score
+FGA_40_PLUS,2014,0.798097749348955,Standard Box Score
+FGA_5_9,2014,0.9622228142809262,Standard Box Score
+FGA_LT_06,2014,0.9646313498377991,Standard Box Score
+FGA_LT_5,2014,0.9834114112578591,Standard Box Score
 FGM,2014,1.0,Standard Box Score
-FG_PCT,2014,1.0,Standard Box Score
+FGM_10_14,2014,0.951446508301828,Standard Box Score
+FGM_15_19,2014,0.9502864942587286,Standard Box Score
+FGM_20_24,2014,0.9711079757894797,Standard Box Score
+FGM_25_29,2014,0.9780206613792904,Standard Box Score
+FGM_30_34,2014,0.5152631397660514,Standard Box Score
+FGM_35_39,2014,0.31494812083495266,Standard Box Score
+FGM_40_PLUS,2014,0.798097749348955,Standard Box Score
+FGM_5_9,2014,0.9622228142809262,Standard Box Score
+FGM_LT_06,2014,0.9646313498377991,Standard Box Score
+FGM_LT_5,2014,0.9834114112578591,Standard Box Score
 FTA,2014,1.0,Standard Box Score
 FTM,2014,1.0,Standard Box Score
-FT_PCT,2014,1.0,Standard Box Score
+FT_AST,2014,0.9769328137325644,Standard Box Score
+ITP_FGA,2014,0.9734458297435816,Standard Box Score
+ITP_FGM,2014,0.9734458297435816,Standard Box Score
+LEFT_CORNER_3_FGA,2014,0.8762118740435036,Standard Box Score
+LEFT_CORNER_3_FGM,2014,0.8762118740435036,Standard Box Score
+MID_FGA,2014,0.976722319122848,Standard Box Score
+MID_FGM,2014,0.976722319122848,Standard Box Score
+MIN,2014,1.0,Standard Box Score
 OREB,2014,1.0,Standard Box Score
+OREB_CHANCES,2014,0.8680304069635296,Standard Box Score
+OREB_CHANCE_DEFER,2014,0.8680304069635296,Standard Box Score
+OREB_CHANCE_PCT,2014,0.8680304069635296,Standard Box Score
+OREB_CHANCE_PCT_ADJ,2014,0.8680304069635296,Standard Box Score
+OREB_CONTEST,2014,0.8680304069635296,Standard Box Score
+OREB_CONTEST_PCT,2014,0.8680304069635296,Standard Box Score
+OREB_PCT,2014,1.0,Standard Box Score
+OREB_UNCONTEST,2014,0.8680304069635296,Standard Box Score
+PAINT_TOUCH_PTS,2014,0.997111834046091,Standard Box Score
 PF,2014,1.0,Standard Box Score
 PFD,2014,1.0,Standard Box Score
+PLUSMINUS,2014,0.9646313498377991,Standard Box Score
+PLUS_MINUS,2014,1.0,Standard Box Score
 PTS,2014,1.0,Standard Box Score
+PTS_PER_ELBOW_TOUCH,2014,0.997111834046091,Standard Box Score
+PTS_PER_PAINT_TOUCH,2014,0.997111834046091,Standard Box Score
+PTS_PER_POST_TOUCH,2014,0.997111834046091,Standard Box Score
+PTS_PER_TOUCH,2014,0.997111834046091,Standard Box Score
+PULL_UP_FG3A,2014,0.7206386938086687,Standard Box Score
+PULL_UP_FG3M,2014,0.7206386938086687,Standard Box Score
+PULL_UP_FGA,2014,1.0,Standard Box Score
+PULL_UP_FGM,2014,1.0,Standard Box Score
+PULL_UP_PTS,2014,1.0,Standard Box Score
+RA_FGA,2014,0.9809480097582746,Standard Box Score
+RA_FGM,2014,0.9809480097582746,Standard Box Score
 REB,2014,1.0,Standard Box Score
+REB_CHANCES,2014,0.8680304069635296,Standard Box Score
+REB_CHANCE_DEFER,2014,0.8680304069635296,Standard Box Score
+REB_CHANCE_PCT,2014,0.8680304069635296,Standard Box Score
+REB_CHANCE_PCT_ADJ,2014,0.8680304069635296,Standard Box Score
+REB_CONTEST,2014,0.8680304069635296,Standard Box Score
+REB_CONTEST_PCT,2014,0.8680304069635296,Standard Box Score
+REB_PCT,2014,1.0,Standard Box Score
+REB_UNCONTEST,2014,0.8680304069635296,Standard Box Score
+RIGHT_CORNER_3_FGA,2014,0.8636659582543186,Standard Box Score
+RIGHT_CORNER_3_FGM,2014,0.8636659582543186,Standard Box Score
 STL,2014,1.0,Standard Box Score
+TM_TOV_PCT,2014,1.0,Standard Box Score
 TOV,2014,1.0,Standard Box Score
-AVG_DRIB_PER_TOUCH,2014,0.997111834046091,Tracking - Physical/Touches
-AVG_SEC_PER_TOUCH,2014,0.997111834046091,Tracking - Physical/Touches
 ELBOW_TOUCHES,2014,0.997111834046091,Tracking - Physical/Touches
-ELBOW_TOUCH_FG_PCT,2014,0.997111834046091,Tracking - Physical/Touches
-ELBOW_TOUCH_PTS,2014,0.997111834046091,Tracking - Physical/Touches
 FRONT_CT_TOUCHES,2014,0.997111834046091,Tracking - Physical/Touches
 PAINT_TOUCHES,2014,0.997111834046091,Tracking - Physical/Touches
-PAINT_TOUCH_FG_PCT,2014,0.997111834046091,Tracking - Physical/Touches
-PAINT_TOUCH_PTS,2014,0.997111834046091,Tracking - Physical/Touches
-POINTS,2014,0.997111834046091,Tracking - Physical/Touches
 POST_TOUCHES,2014,0.997111834046091,Tracking - Physical/Touches
-PTS_PER_ELBOW_TOUCH,2014,0.997111834046091,Tracking - Physical/Touches
-PTS_PER_PAINT_TOUCH,2014,0.997111834046091,Tracking - Physical/Touches
-PTS_PER_POST_TOUCH,2014,0.997111834046091,Tracking - Physical/Touches
-PTS_PER_TOUCH,2014,0.997111834046091,Tracking - Physical/Touches
 TIME_OF_POSS,2014,0.997111834046091,Tracking - Physical/Touches
 TOUCHES,2014,0.997111834046091,Tracking - Physical/Touches
 AST_ADJ,2014,0.997111834046091,Tracking - Playmaking
 AST_PTS_CREATED,2014,0.997111834046091,Tracking - Playmaking
 AST_TO_PASS_PCT,2014,0.997111834046091,Tracking - Playmaking
 AST_TO_PASS_PCT_ADJ,2014,0.997111834046091,Tracking - Playmaking
-FT_AST,2014,0.9769328137325644,Tracking - Playmaking
-PASSES_MADE,2014,0.997111834046091,Tracking - Playmaking
-PASSES_RECEIVED,2014,0.997111834046091,Tracking - Playmaking
 POTENTIAL_AST,2014,0.997111834046091,Tracking - Playmaking
 SECONDARY_AST,2014,0.997111834046091,Tracking - Playmaking
-AVG_DREB_DIST,2014,0.8673579834059756,Tracking - Rebounding Contests
-AVG_OREB_DIST,2014,0.8673579834059756,Tracking - Rebounding Contests
-AVG_REB_DIST,2014,0.8673579834059756,Tracking - Rebounding Contests
-DREB_CHANCES,2014,0.8680304069635296,Tracking - Rebounding Contests
-DREB_CHANCE_DEFER,2014,0.8680304069635296,Tracking - Rebounding Contests
-DREB_CHANCE_PCT,2014,0.8680304069635296,Tracking - Rebounding Contests
-DREB_CHANCE_PCT_ADJ,2014,0.8680304069635296,Tracking - Rebounding Contests
-DREB_CONTEST,2014,0.8680304069635296,Tracking - Rebounding Contests
-DREB_CONTEST_PCT,2014,0.8680304069635296,Tracking - Rebounding Contests
-DREB_UNCONTEST,2014,0.8680304069635296,Tracking - Rebounding Contests
-OREB_CHANCES,2014,0.8680304069635296,Tracking - Rebounding Contests
-OREB_CHANCE_DEFER,2014,0.8680304069635296,Tracking - Rebounding Contests
-OREB_CHANCE_PCT,2014,0.8680304069635296,Tracking - Rebounding Contests
-OREB_CHANCE_PCT_ADJ,2014,0.8680304069635296,Tracking - Rebounding Contests
-OREB_CONTEST,2014,0.8680304069635296,Tracking - Rebounding Contests
-OREB_CONTEST_PCT,2014,0.8680304069635296,Tracking - Rebounding Contests
-OREB_UNCONTEST,2014,0.8680304069635296,Tracking - Rebounding Contests
-REB_CHANCES,2014,0.8680304069635296,Tracking - Rebounding Contests
-REB_CHANCE_DEFER,2014,0.8680304069635296,Tracking - Rebounding Contests
-REB_CHANCE_PCT,2014,0.8680304069635296,Tracking - Rebounding Contests
-REB_CHANCE_PCT_ADJ,2014,0.8680304069635296,Tracking - Rebounding Contests
-REB_CONTEST,2014,0.8680304069635296,Tracking - Rebounding Contests
-REB_CONTEST_PCT,2014,0.8680304069635296,Tracking - Rebounding Contests
-REB_UNCONTEST,2014,0.8680304069635296,Tracking - Rebounding Contests
 hustle_BOX_OUTS,2016,0.9008782048449729,Tracking - Hustle
 hustle_BOX_OUT_PLAYER_REBS,2016,0.9008782048449729,Tracking - Hustle
 hustle_BOX_OUT_PLAYER_TEAM_REBS,2016,0.9008782048449729,Tracking - Hustle
@@ -420,107 +304,16 @@ hustle_PCT_LOOSE_BALLS_RECOVERED_DEF,2016,0.9008782048449729,Tracking - Hustle
 hustle_PCT_LOOSE_BALLS_RECOVERED_OFF,2016,0.9008782048449729,Tracking - Hustle
 hustle_SCREEN_ASSISTS,2016,0.9008782048449729,Tracking - Hustle
 hustle_SCREEN_AST_PTS,2016,0.9008782048449729,Tracking - Hustle
-hustle_TEAM_ABBREVIATION,2016,0.931815100288163,Tracking - Hustle
-hustle_TEAM_ID,2016,0.9313725869161189,Tracking - Hustle
-team_poss,2025,0.07601260354728871,Advanced - Efficiency
-two_pt_def_AGE,2025,0.9245108502312345,Defensive Tracking - 2PT
-two_pt_def_G,2025,0.9245108502312345,Defensive Tracking - 2PT
-two_pt_def_GP,2025,0.9245108502312345,Defensive Tracking - 2PT
-two_pt_def_PLAYER_LAST_TEAM_ABBREVIATION,2025,0.9245108502312345,Defensive Tracking - 2PT
-two_pt_def_PLAYER_LAST_TEAM_ID,2025,0.9245108502312345,Defensive Tracking - 2PT
-two_pt_def_PLAYER_NAME,2025,0.9245108502312345,Defensive Tracking - 2PT
-two_pt_def_PLAYER_POSITION,2025,0.9245108502312345,Defensive Tracking - 2PT
-three_pt_def_AGE,2025,0.8751689790110281,Defensive Tracking - 3PT
-three_pt_def_G,2025,0.8751689790110281,Defensive Tracking - 3PT
-three_pt_def_GP,2025,0.8751689790110281,Defensive Tracking - 3PT
-three_pt_def_PLAYER_LAST_TEAM_ABBREVIATION,2025,0.8751689790110281,Defensive Tracking - 3PT
-three_pt_def_PLAYER_LAST_TEAM_ID,2025,0.8751689790110281,Defensive Tracking - 3PT
-three_pt_def_PLAYER_NAME,2025,0.8751689790110281,Defensive Tracking - 3PT
-three_pt_def_PLAYER_POSITION,2025,0.8751689790110281,Defensive Tracking - 3PT
-overall_def_AGE,2025,0.9566702241195304,Defensive Tracking - Overall
-overall_def_G,2025,0.9566702241195304,Defensive Tracking - Overall
-overall_def_GP,2025,0.9566702241195304,Defensive Tracking - Overall
-overall_def_PLAYER_LAST_TEAM_ABBREVIATION,2025,0.9566702241195304,Defensive Tracking - Overall
-overall_def_PLAYER_LAST_TEAM_ID,2025,0.9566702241195304,Defensive Tracking - Overall
-overall_def_PLAYER_NAME,2025,0.9566702241195304,Defensive Tracking - Overall
-overall_def_PLAYER_POSITION,2025,0.9566702241195304,Defensive Tracking - Overall
-less_10ft_def_AGE,2025,0.8973674848808253,Defensive Tracking - Paint (<10ft)
-less_10ft_def_G,2025,0.8973674848808253,Defensive Tracking - Paint (<10ft)
-less_10ft_def_GP,2025,0.8973674848808253,Defensive Tracking - Paint (<10ft)
-less_10ft_def_PLAYER_LAST_TEAM_ABBREVIATION,2025,0.8973674848808253,Defensive Tracking - Paint (<10ft)
-less_10ft_def_PLAYER_LAST_TEAM_ID,2025,0.8973674848808253,Defensive Tracking - Paint (<10ft)
-less_10ft_def_PLAYER_NAME,2025,0.8973674848808253,Defensive Tracking - Paint (<10ft)
-less_10ft_def_PLAYER_POSITION,2025,0.8973674848808253,Defensive Tracking - Paint (<10ft)
-more_15ft_def_AGE,2025,0.8971540377090004,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_AVG_DREB_DIST,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_AVG_OREB_DIST,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_AVG_REB_DIST,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_DREB,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_DREB_CHANCES,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_DREB_CHANCE_DEFER,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_DREB_CHANCE_PCT,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_DREB_CHANCE_PCT_ADJ,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_DREB_CONTEST,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_DREB_CONTEST_PCT,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_DREB_UNCONTEST,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_G,2025,0.8971540377090004,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_GP,2025,0.8971540377090004,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_OREB,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_OREB_CHANCES,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_OREB_CHANCE_DEFER,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_OREB_CHANCE_PCT,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_OREB_CHANCE_PCT_ADJ,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_OREB_CONTEST,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_OREB_CONTEST_PCT,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_OREB_UNCONTEST,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_PLAYER_LAST_TEAM_ABBREVIATION,2025,0.8971540377090004,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_PLAYER_LAST_TEAM_ID,2025,0.8971540377090004,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_PLAYER_NAME,2025,0.8971540377090004,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_PLAYER_POSITION,2025,0.8971540377090004,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_REB,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_REB_CHANCES,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_REB_CHANCE_DEFER,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_REB_CHANCE_PCT,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_REB_CHANCE_PCT_ADJ,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_REB_CONTEST,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_REB_CONTEST_PCT,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_REB_UNCONTEST,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_TEAM_ABBREVIATION,2025,0.5210229096809257,Defensive Tracking - Perimeter (>15ft)
-more_15ft_def_TEAM_ID,2025,0.006545713269299182,Defensive Tracking - Perimeter (>15ft)
-D_FGA,2025,0.7007140845764335,Defensive Tracking - Rim (<6ft)
-D_FGM,2025,0.7007140845764335,Defensive Tracking - Rim (<6ft)
-D_FG_PCT,2025,0.7007140845764335,Defensive Tracking - Rim (<6ft)
-NORMAL_FG_PCT,2025,0.7007140845764335,Defensive Tracking - Rim (<6ft)
-PCT_PLUSMINUS,2025,0.7007140845764335,Defensive Tracking - Rim (<6ft)
-less_6ft_def_AGE,2025,0.8661686232657417,Defensive Tracking - Rim (<6ft)
-less_6ft_def_G,2025,0.8661686232657417,Defensive Tracking - Rim (<6ft)
-less_6ft_def_GP,2025,0.8661686232657417,Defensive Tracking - Rim (<6ft)
-less_6ft_def_PLAYER_LAST_TEAM_ABBREVIATION,2025,0.8661686232657417,Defensive Tracking - Rim (<6ft)
-less_6ft_def_PLAYER_LAST_TEAM_ID,2025,0.8661686232657417,Defensive Tracking - Rim (<6ft)
-less_6ft_def_PLAYER_NAME,2025,0.8661686232657417,Defensive Tracking - Rim (<6ft)
-less_6ft_def_PLAYER_POSITION,2025,0.8661686232657417,Defensive Tracking - Rim (<6ft)
-MIN1,2025,0.7328545779123729,Metadata/Context
-speed_distance_GP,2025,0.9891141942369264,Other/Uncategorized
-speed_distance_L,2025,0.9891141942369264,Other/Uncategorized
-speed_distance_MIN,2025,0.9891141942369264,Other/Uncategorized
-speed_distance_PLAYER_NAME,2025,0.9891141942369264,Other/Uncategorized
-speed_distance_W,2025,0.9891141942369264,Other/Uncategorized
-post_touch_GP,2025,0.9891141942369264,Play Type - Post Touch
-post_touch_L,2025,0.9891141942369264,Play Type - Post Touch
-post_touch_MIN,2025,0.9891141942369264,Play Type - Post Touch
-post_touch_PLAYER_NAME,2025,0.9891141942369264,Play Type - Post Touch
-post_touch_W,2025,0.9891141942369264,Play Type - Post Touch
-hustle_AGE,2025,0.9378512984702952,Tracking - Hustle
-hustle_G,2025,0.9378512984702952,Tracking - Hustle
-hustle_MIN,2025,0.9378512984702952,Tracking - Hustle
-hustle_PLAYER_NAME,2025,0.9378512984702952,Tracking - Hustle
-AVG_SPEED,2025,0.732494856419685,Tracking - Speed & Distance
-AVG_SPEED_DEF,2025,0.732494856419685,Tracking - Speed & Distance
-AVG_SPEED_OFF,2025,0.732494856419685,Tracking - Speed & Distance
-DIST_FEET,2025,0.732494856419685,Tracking - Speed & Distance
-DIST_MILES,2025,0.732494856419685,Tracking - Speed & Distance
-DIST_MILES_DEF,2025,0.732494856419685,Tracking - Speed & Distance
-DIST_MILES_OFF,2025,0.732494856419685,Tracking - Speed & Distance
-TEAM_COUNT,2026,1.0,Metadata/Context
+D_FG_PCT,2025,0.7007140845764335,Other/Uncategorized
+NORMAL_FG_PCT,2025,0.7007140845764335,Other/Uncategorized
+D_FGA,2025,0.7007140845764335,Standard Box Score
+D_FGM,2025,0.7007140845764335,Standard Box Score
+PCT_PLUSMINUS,2025,0.7007140845764335,Standard Box Score
+AVG_SPEED,2025,0.732494856419685,Tracking - Physical/Touches
+AVG_SPEED_DEF,2025,0.732494856419685,Tracking - Physical/Touches
+AVG_SPEED_OFF,2025,0.732494856419685,Tracking - Physical/Touches
+DIST_MILES,2025,0.732494856419685,Tracking - Physical/Touches
+DIST_MILES_DEF,2025,0.732494856419685,Tracking - Physical/Touches
+DIST_MILES_OFF,2025,0.732494856419685,Tracking - Physical/Touches
 opp_team_abbr,2026,1.0,Metadata/Context
 opp_team_id ,2026,1.0,Metadata/Context
