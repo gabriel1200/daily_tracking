@@ -70,7 +70,7 @@ _EXPLICIT_DROP_COLUMNS = {
     # hustle metadata not caught by suffix rule (TEAM_ID covered above, but TEAM_ABBREVIATION too)
     'hustle_TEAM_ABBREVIATION',
     # Redundant standalone columns
-    'PLAYER_NAME', 'NICKNAME', 'PLAYER_POSITION',
+    'NICKNAME', 'PLAYER_POSITION',
     'PLAYER_LAST_TEAM_ABBREVIATION', 'PLAYER_LAST_TEAM_ID',
     'HTM', 'VTM',                           # comp=0.02, superseded by opp_team_abbr
     'opp_team', 'opp_id', 'series_key', 'team',  # superseded by opp_team_abbr / opp_team_id
