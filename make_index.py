@@ -1,284 +1,124 @@
-import pandas as pd
-import glob
+import time
 import os
-import requests
-from pathlib import Path
+import pandas as pd
+from nba_api.stats.endpoints import ShotChartDetail
+from nba_api.stats.static import teams
 
-# ==========================================
-# 1. SETUP & PATHS
-# ==========================================
-# Current Dir: ~/basketball/daily_tracking
-# Data Dir:    ~/basketball/player_sheets/game_report/all_games
-BASE_DIR = Path(".").resolve()
-SOURCE_DIR = (BASE_DIR.parent / "player_sheets" / "game_report" / "all_games").resolve()
-LOGS_DIR = (BASE_DIR / "careerlogs").resolve()
-INDEX_FILE = BASE_DIR / "column_index.csv"
-
-# Master Game Index URL (Source of Truth for Metadata)
-INDEX_URL = "https://raw.githubusercontent.com/gabriel1200/shot_data/refs/heads/master/game_dates.csv"
-
-# Ensure directories exist
-LOGS_DIR.mkdir(parents=True, exist_ok=True)
-
-# ==========================================
-# COLUMN FILTERING
-# ==========================================
-# Identity/metadata suffixes that every NBA.com endpoint re-attaches to its response.
-# After merging multiple endpoints, you end up with e.g. hustle_PLAYER_NAME,
-# post_touch_TEAM_ID, speed_distance_AGE etc. — all redundant with the base columns.
-_PREFIXED_METADATA_SUFFIXES = {
-    'AGE', 'G', 'GP', 'W', 'L', 'MIN', 'MIN1',
-    'PLAYER_NAME', 'PLAYER_POSITION', 'PLAYER_LAST_TEAM_ABBREVIATION', 'PLAYER_LAST_TEAM_ID',
-    'TEAM_ID', 'TEAM_ABBREVIATION', 'TEAM_ABBR',
+# ---------------------------------------------------------
+# 1. Apply your custom NBA API Headers / Patch
+# ---------------------------------------------------------
+NBA_STATS_HEADERS = {
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cache-Control": "no-cache",
+    "Connection": "keep-alive",
+    "Host": "stats.nba.com",
+    "Origin": "https://www.nba.com",
+    "Pragma": "no-cache",
+    "Referer": "https://www.nba.com/",
+    "Sec-Ch-Ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+    "Sec-Ch-Ua-Mobile": "?0",
+    "Sec-Ch-Ua-Platform": '"Windows"',
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-site",
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/131.0.0.0 Safari/537.36"
+    ),
 }
 
-# Stat prefixes whose *entire column set* duplicates standalones.
-# speed_distance_AVG_SPEED etc. are all present as clean unprefixed columns.
-# sp_work_ ratings mirror the standard advanced cols exactly.
-_DROP_ENTIRE_PREFIX = {
-    'speed_distance_',
-    'sp_work_',
-}
+try:
+    from nba_api.stats.library import http as stats_http
+    from nba_api.library import http as base_http
 
-# Explicit one-off drops that don't fit the pattern rules above.
-# See comments for rationale on each group.
-_EXPLICIT_DROP_COLUMNS = {
-    # Endpoint-level dupes: FREQ/PLUSMINUS re-attached by each defensive endpoint
-    'less_6ft_def_FREQ',  'less_6ft_def_PLUSMINUS',
-    'less_6ft_def_FGA_LT_06', 'less_6ft_def_FGM_LT_06',   # already in FGA_LT_06 / FGM_LT_06
-    'less_6ft_def_LT_06_PCT', 'less_6ft_def_NS_LT_06_PCT', # already in LT_06_PCT / NS_LT_06_PCT
-    'less_10ft_def_FREQ', 'less_10ft_def_PLUSMINUS',
-    'more_15ft_def_FREQ', 'more_15ft_def_PLUSMINUS',
-    'three_pt_def_FREQ',  'three_pt_def_PLUSMINUS',
-    'two_pt_def_FREQ',    'two_pt_def_PLUSMINUS',
-    # more_15ft_def rebound stats: leaked from wrong endpoint, already standalone
-    'more_15ft_def_AVG_DREB_DIST', 'more_15ft_def_AVG_OREB_DIST', 'more_15ft_def_AVG_REB_DIST',
-    'more_15ft_def_DREB', 'more_15ft_def_DREB_CHANCES', 'more_15ft_def_DREB_CHANCE_DEFER',
-    'more_15ft_def_DREB_CHANCE_PCT', 'more_15ft_def_DREB_CHANCE_PCT_ADJ',
-    'more_15ft_def_DREB_CONTEST', 'more_15ft_def_DREB_CONTEST_PCT', 'more_15ft_def_DREB_UNCONTEST',
-    'more_15ft_def_OREB', 'more_15ft_def_OREB_CHANCES', 'more_15ft_def_OREB_CHANCE_DEFER',
-    'more_15ft_def_OREB_CHANCE_PCT', 'more_15ft_def_OREB_CHANCE_PCT_ADJ',
-    'more_15ft_def_OREB_CONTEST', 'more_15ft_def_OREB_CONTEST_PCT', 'more_15ft_def_OREB_UNCONTEST',
-    'more_15ft_def_REB', 'more_15ft_def_REB_CHANCES', 'more_15ft_def_REB_CHANCE_DEFER',
-    'more_15ft_def_REB_CHANCE_PCT', 'more_15ft_def_REB_CHANCE_PCT_ADJ',
-    'more_15ft_def_REB_CONTEST', 'more_15ft_def_REB_CONTEST_PCT', 'more_15ft_def_REB_UNCONTEST',
-    # post_touch double-prefixed dupes and metadata
-    'post_touch_POST_TOUCHES', 'post_touch_POST_TOUCH_FG_PCT', 'post_touch_POST_TOUCH_PTS',
-    'post_touch_TOUCHES',
-    'post_touch_GP', 'post_touch_L', 'post_touch_MIN', 'post_touch_W',
-    'post_touch_TEAM_ID',
-    # hustle metadata not caught by suffix rule (TEAM_ID covered above, but TEAM_ABBREVIATION too)
-    'hustle_TEAM_ABBREVIATION',
-    # Redundant standalone columns
-    'NICKNAME', 'PLAYER_POSITION',
-    'PLAYER_LAST_TEAM_ABBREVIATION', 'PLAYER_LAST_TEAM_ID',
-    'HTM', 'VTM',                           # comp=0.02, superseded by opp_team_abbr
-    'opp_team', 'opp_id', 'series_key', 'team',  # superseded by opp_team_abbr / opp_team_id
-    'index',                                # leaked DataFrame index artifact (comp=0.03)
-    'MIN1',                                 # dupe of MIN from speed_distance merge
-    'G',                                    # dupe of GP (comp=0.47)
-    'TEAM_ABBR',                            # dupe of TEAM_ABBREVIATION
-    'DIST_FEET',                            # dupe of DIST_MILES in different units (comp=0.73)
-    # Game-level nonsense: season accumulators baked into per-game rows
-    'W', 'L', 'W_PCT', 'GP',
-    'DD2', 'TD3',
-    'NBA_FANTASY_PTS', 'WNBA_FANTASY_PTS',
-    'TEAM_COUNT',
-    'FGM_PG', 'FGA_PG',                    # per-game averages inside a per-game file
-    'team_poss',                            # comp=0.08, team-level not player-level
-    'POINTS',                               # dupe of PTS from possessions endpoint
-}
+    stats_http.STATS_HEADERS = NBA_STATS_HEADERS
+    stats_http.NBAStatsHTTP.headers = NBA_STATS_HEADERS
 
-def should_drop(col: str) -> bool:
-    """Returns True if a column should be excluded from all outputs."""
-    # Rule 1: NBA.com ranking columns — no value in game-level data
-    if col.upper().endswith('_RANK'):
-        return True
-    # Rule 2: entire prefixes that duplicate standalone columns
-    for prefix in _DROP_ENTIRE_PREFIX:
-        if col.startswith(prefix) or col.lower().startswith(prefix):
-            return True
-    # Rule 3: prefixed metadata suffixes re-attached by every endpoint
-    for suffix in _PREFIXED_METADATA_SUFFIXES:
-        if col.endswith('_' + suffix) and col != suffix:
-            return True
-    # Rule 4: explicit one-off drops
-    return col in _EXPLICIT_DROP_COLUMNS
+    stats_http.NBAStatsHTTP._session = None
+    base_http.NBAHTTP._session = None
+except Exception as e:
+    print(f"Warning: Could not patch nba_api headers: {e}")
 
-def get_mapping_df():
-    """Downloads and normalizes the master game mapping file."""
-    print(f"Downloading game index from GitHub...")
-    df = pd.read_csv(INDEX_URL)
-    # Normalize IDs to handle leading 00s (String -> Int conversion)
-    df['GAME_ID'] = pd.to_numeric(df['GAME_ID'], errors='coerce').fillna(0).astype(int)
-    df['TEAM_ID'] = pd.to_numeric(df['TEAM_ID'], errors='coerce').fillna(0).astype(int)
-    return df
+# ---------------------------------------------------------
+# 2. Setup Scraper Parameters
+# ---------------------------------------------------------
+WNBA_LEAGUE_ID = "10"
+# Toggle this to 'Playoffs' when you are ready to pull the postseason data
+CURRENT_SEASON_TYPE = "Regular Season" 
 
-# ==========================================
-# 2. CATEGORIZATION LOGIC (Scraper-Informed)
-# ==========================================
-def get_category_from_scraper(col):
-    """Categorizes columns based on the specific prefixes used in game_report_scrape.py"""
-    c = col.lower()
-    
-    # Defensive Tracking (Scraper url18-url23)
-    if 'overall_def_' in c: return 'Defensive Tracking - Overall'
-    if 'three_pt_def_' in c: return 'Defensive Tracking - 3PT'
-    if 'two_pt_def_' in c: return 'Defensive Tracking - 2PT'
-    if 'less_6ft_def_' in c: return 'Defensive Tracking - Rim (<6ft)'
-    if 'less_10ft_def_' in c: return 'Defensive Tracking - Paint (<10ft)'
-    if 'more_15ft_def_' in c: return 'Defensive Tracking - Perimeter (>15ft)'
-    
-    # Shot Context / Defenders (Scraper url7-url10)
-    if 'very_tight_' in c: return 'Shot Context - Very Tight (0-2ft)'
-    if 'tight_' in c: return 'Shot Context - Tight (2-4ft)'
-    if 'open_' in c: return 'Shot Context - Open (4-6ft)'
-    if 'wide_open_' in c: return 'Shot Context - Wide Open (6ft+)'
-    
-    # Play Types & Touches (Scraper url11-url13, url25)
-    if 'pullup_' in c: return 'Play Type - Pull Up'
-    if 'post_touch_' in c: return 'Play Type - Post Touch'
-    if 'catch_shoot' in c: return 'Play Type - Catch and Shoot'
-    if 'drive_' in c: return 'Play Type - Drives'
-    
-    # Hustle & Effort (Scraper url24)
-    if 'hustle_' in c or any(x in c for x in ['boxout', 'box_out', 'screen_ast', 'defle', 'loose_ball', 'charges_drawn']):
-        return 'Tracking - Hustle'
-    
-    # Movement & Passing
-    if any(x in c for x in ['speed_distance_', 'dist_miles', 'avg_speed', 'touches', 'front_ct_touches', 'time_of_poss']):
-        return 'Tracking - Physical/Touches'
-    if any(x in c for x in ['pass_', 'potential_ast', 'ast_pts_created', 'ast_adj', 'secondary_ast']):
-        return 'Tracking - Playmaking'
+# Get all WNBA Teams
+try:
+    wnba_teams = teams.get_wnba_teams()
+except AttributeError:
+    all_teams = teams.get_teams()
+    wnba_teams = [t for t in all_teams if str(t['id']).startswith('161166')]
 
-    # Efficiency & Ratings
-    if any(x in c for x in ['pie', 'off_rating', 'def_rating', 'net_rating', 'ast_ratio', 'usg_pct', 'pace', 'ts_pct', 'efg_pct']):
-        if '_rank' not in c: return 'Advanced - Efficiency'
+start_year = 1997
+end_year = 2023
+seasons = [f"{year}-{str(year+1)[-2:]}" for year in range(start_year, end_year + 1)]
+
+# ---------------------------------------------------------
+# 3. Main Scraping Loop
+# ---------------------------------------------------------
+def scrape_wnba_team_shotcharts(teams_list, seasons_list, season_type="Regular Season"):
+    
+    print(f"Found {len(teams_list)} WNBA franchises. Beginning {season_type} scrape...")
+    
+    # Determine the folder suffix
+    is_playoffs = (season_type == "Playoffs")
+    folder_suffix = "ps" if is_playoffs else ""
+    
+    for season in seasons_list:
+        print(f"\n--- Scraping Season: {season} ({season_type}) ---")
+        
+        # Extract base year and append 'ps' if it's the playoffs
+        base_year = season.split('-')[0]
+        folder_name = f"{base_year}{folder_suffix}"
+        
+        # Target directory: team/{year} or team/{year}ps
+        target_dir = os.path.join("team", folder_name)
+        os.makedirs(target_dir, exist_ok=True)
+        
+        for team in teams_list:
+            team_id = team['id']
+            team_name = team['full_name']
             
-    # Core Stats
-    if any(x in c for x in ['pts', 'ast', 'reb', 'stl', 'blk', 'tov', 'pf', 'min', 'fgm', 'fga', 'ftm', 'fta', 'fg3m', 'fg3a']):
-        return 'Standard Box Score'
+            try:
+                # player_id=0 fetches all players for the specified team
+                sc = ShotChartDetail(
+                    team_id=team_id,
+                    player_id=0,
+                    context_measure_simple='FGA',
+                    season_nullable=season,
+                    season_type_all_star=season_type,
+                    league_id=WNBA_LEAGUE_ID
+                )
+                
+                # Index 0 is Shot_Chart_Detail
+                team_shots_df = sc.get_data_frames()[0] 
+                
+                if not team_shots_df.empty:
+                    team_shots_df['SEASON'] = season 
+                    
+                    # Save individual team CSV in the structured folder
+                    file_path = os.path.join(target_dir, f"{team_id}.csv")
+                    team_shots_df.to_csv(file_path, index=False)
+                    
+                    print(f"  [SUCCESS] {team_name}: Saved {len(team_shots_df)} shots to {file_path}")
+                else:
+                    print(f"  [EMPTY] {team_name} had no data for {season}.")
+                    
+            except Exception as e:
+                print(f"  [ERROR] Failed to fetch {team_name} for {season}: {e}")
+            
+            # Critical: Sleep to prevent IP blocking/timeouts
+            time.sleep(.5) 
 
-    # Contextual info
-    if any(x in c for x in ['player_id', 'team_id', 'game_id', 'date', 'year', 'season', 'playoffs', 'htm', 'vtm', 'opp_team']):
-        return 'Metadata/Context'
+    print(f"\n{season_type} scrape sequence complete!")
 
-    return 'Other/Uncategorized'
-
-# ==========================================
-# 3. CORE PROCESSING FUNCTIONS
-# ==========================================
-
-def run_full_generation():
-    """Iterates through all yearly files and builds career logs from scratch."""
-    mapping_df = get_mapping_df()
-    csv_files = sorted(glob.glob(str(SOURCE_DIR / "all_*.csv")))
-    
-    for file_path in csv_files:
-        file_name = os.path.basename(file_path)
-        if any(x in file_name for x in ["sample", "master"]): continue
-        
-        print(f"Generating from: {file_name}")
-        df = pd.read_csv(file_path, low_memory=False)
-        
-        # Normalize IDs
-        df['GAME_ID'] = pd.to_numeric(df['GAME_ID'], errors='coerce').fillna(0).astype(int)
-        df['TEAM_ID'] = pd.to_numeric(df['TEAM_ID'], errors='coerce').fillna(0).astype(int)
-        
-        # Inject Metadata from Index
-        cols_to_replace = ['HTM', 'VTM', 'opp_team', 'team', 'date', 'season', 'playoffs']
-        df = df.drop(columns=[c for c in cols_to_replace if c in df.columns], errors='ignore')
-        df = df.merge(mapping_df, on=['GAME_ID', 'TEAM_ID'], how='left')
-        
-        df['PLAYER_ID'] = pd.to_numeric(df['PLAYER_ID'], errors='coerce').fillna(0).astype(int)
-        df = df[df['PLAYER_ID'] != 0]
-        df = df[[c for c in df.columns if not should_drop(c)]]
-
-        for p_id, p_group in df.groupby('PLAYER_ID'):
-            player_file = LOGS_DIR / f"{int(p_id)}.csv"
-            if player_file.exists():
-                existing = pd.read_csv(player_file, low_memory=False)
-                pd.concat([existing, p_group], ignore_index=True, sort=False).to_csv(player_file, index=False)
-            else:
-                p_group.to_csv(player_file, index=False)
-
-def sync_latest_season():
-    """Determines the current active season from mapping and updates career logs (Overwrite Mode)."""
-    mapping_df = get_mapping_df()
-    latest_season_str = mapping_df['season'].max()
-    
-    # NBA Syntax: 2025-26 -> 2026.csv
-    repo_year = latest_season_str[:2] + latest_season_str[-2:]
-    print(f"Syncing Current Season: {latest_season_str} (Repo Year: {repo_year})")
-    
-    target_files = [SOURCE_DIR / f"all_{repo_year}.csv", SOURCE_DIR / f"all_{repo_year}ps.csv"]
-    
-    for file_path in target_files:
-        if not file_path.exists(): continue
-        
-        df = pd.read_csv(file_path, low_memory=False)
-        df['GAME_ID'] = pd.to_numeric(df['GAME_ID'], errors='coerce').fillna(0).astype(int)
-        df['TEAM_ID'] = pd.to_numeric(df['TEAM_ID'], errors='coerce').fillna(0).astype(int)
-        
-        # Merge Metadata
-        cols_to_replace = ['HTM', 'VTM', 'opp_team', 'team', 'date', 'season', 'playoffs']
-        df = df.drop(columns=[c for c in cols_to_replace if c in df.columns], errors='ignore')
-        df = df.merge(mapping_df, on=['GAME_ID', 'TEAM_ID'], how='left')
-        
-        df['PLAYER_ID'] = pd.to_numeric(df['PLAYER_ID'], errors='coerce').fillna(0).astype(int)
-        df = df[[c for c in df.columns if not should_drop(c)]]
-        
-        for p_id, p_group in df[df['PLAYER_ID'] != 0].groupby('PLAYER_ID'):
-            player_file = LOGS_DIR / f"{int(p_id)}.csv"
-            if player_file.exists():
-                existing = pd.read_csv(player_file, low_memory=False)
-                # Remove old entries for this season/playoff combo to prevent duplicates
-                mask = (existing['season'] == latest_season_str) & (existing['playoffs'] == p_group['playoffs'].iloc[0])
-                existing = existing[~mask]
-                pd.concat([existing, p_group], ignore_index=True, sort=False).to_csv(player_file, index=False)
-            else:
-                p_group.to_csv(player_file, index=False)
-
-def generate_column_index():
-    """Generates a schema map of start years and categories for all columns."""
-    csv_files = sorted(glob.glob(str(SOURCE_DIR / "all_*.csv")))
-    stats = []
-
-    for file_path in csv_files:
-        file_name = os.path.basename(file_path)
-        if any(x in file_name for x in ["sample", "master"]): continue
-        year = int(file_name.replace('all_', '').replace('ps.csv', '').replace('.csv', ''))
-        
-        df = pd.read_csv(file_path, low_memory=False)
-        for col in df.columns:
-            if should_drop(col): continue
-            non_null = df[col].notnull().sum()
-            stats.append({'col': col, 'year': year, 'comp': non_null / len(df) if len(df)>0 else 0, 'has': non_null > 0})
-
-    df_stats = pd.DataFrame(stats)
-    idx = df_stats.groupby('col').apply(lambda x: pd.Series({
-        'start_year': x.loc[x['has'], 'year'].min() if x['has'].any() else None,
-        'avg_completeness': x['comp'].mean(),
-        'category': get_category_from_scraper(x.name)
-    }), include_groups=False).reset_index().dropna(subset=['start_year'])
-    
-    idx['start_year'] = idx['start_year'].astype(int)
-    idx.sort_values(['start_year', 'category', 'col']).to_csv(INDEX_FILE, index=False)
-    print(f"Column index saved to {INDEX_FILE}")
-
-# ==========================================
-# 4. EXECUTION
-# ==========================================
+# Execute the scraper
 if __name__ == "__main__":
-    import sys
-    print("\nNBA Career Log Manager")
-    print("1: Full Rebuild (Slow - processes all years)")
-    print("2: Daily Sync (Fast - updates current season only)")
-    print("3: Update Column Index")
-    
-    choice = input("\nSelect an option: ")
-    
-    if choice == '1': run_full_generation()
-    elif choice == '2': sync_latest_season()
-    elif choice == '3': generate_column_index()
-    else: print("Invalid selection.")
+    scrape_wnba_team_shotcharts(wnba_teams, seasons, season_type=CURRENT_SEASON_TYPE)
