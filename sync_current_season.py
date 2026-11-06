@@ -28,6 +28,17 @@ current_repo_year = latest_season_str[:2] + latest_season_str[-2:]
 print(f"Latest season detected: {latest_season_str}")
 print(f"Targeting repo year: {current_repo_year}")
 
+ALIASES = {**{f'PULL_UP_{c}': f'pullup_PULL_UP_{c}' for c in ('FGA', 'FGM', 'FG3A', 'FG3M', 'FG3_PCT', 'EFG_PCT', 'PTS', 'FG_PCT')},
+           **{f'lt6ft_totals_{c}': f'less_6ft_def_{c}' for c in ('FGA_LT_06', 'FGM_LT_06', 'LT_06_PCT', 'NS_LT_06_PCT', 'PLUSMINUS')},
+           **{c: f'overall_def_{c}' for c in ('D_FGA', 'D_FGM', 'D_FG_PCT', 'NORMAL_FG_PCT', 'PCT_PLUSMINUS')},
+           'AST_POINTS_CREATED': 'AST_PTS_CREATED'}
+
+
+def write_parquet(csv_path):
+    """The page reads the parquet, so it has to change with the CSV. Read back from the CSV so dtypes match parquet_convert.py."""
+    pd.read_csv(csv_path, low_memory=False).to_parquet(csv_path.with_suffix('.parquet'), engine='pyarrow', index=False)
+
+
 # 4. Identify the files to process
 target_patterns = [f"all_{current_repo_year}.csv", f"all_{current_repo_year}ps.csv"]
 target_files = [source_dir / p for p in target_patterns if (source_dir / p).exists()]
@@ -47,7 +58,14 @@ for file_path in target_files:
     df['PLAYER_ID'] = pd.to_numeric(df['PLAYER_ID'], errors='coerce').fillna(0).astype(int)
     df = df[df['PLAYER_ID'] != 0]
 
+    # The daily scrape names some columns differently from the older career-log rows (nba-pipeline shared/build_game_reports.py REPAIRED_ALIASES). Fill the older
+    # names so the career log page doesn't show them empty for the new season.
+    for older, newer in ALIASES.items():
+        if newer in df.columns:
+            df[older] = df[newer].combine_first(df[older]) if older in df.columns else df[newer]   # the prefixed column wins: bare PULL_UP_PTS comes from the Efficiency request, whose points don't always add up
+
     # Merge with index to fill metadata
+    df = df.drop(columns=['TIME_OF_POSS_NBA', 'AVG_SEC_PER_TOUCH_NBA'], errors='ignore')     # game logs keep the NBA's own; career pages show the default
     cols_to_sync = ['HTM', 'VTM', 'opp_team', 'team', 'date', 'season', 'playoffs']
     df = df.drop(columns=[c for c in cols_to_sync if c in df.columns])
     df = df.merge(mapping_df, on=['GAME_ID', 'TEAM_ID'], how='left')
@@ -68,5 +86,6 @@ for file_path in target_files:
             combined_df.to_csv(player_file, index=False)
         else:
             p_group.to_csv(player_file, index=False)
+        write_parquet(player_file)
 
 print(f"\nSync complete. {latest_season_str} data is now live in career logs.")
